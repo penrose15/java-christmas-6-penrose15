@@ -1,13 +1,14 @@
 package christmas.domain.calendar;
 
-public enum StarDate {
-    STAR,
-    NOT_STAR;
+import java.util.List;
 
-    public static StarDate checkStarDate(int number) {
-        if(number == 7) {
-            return STAR;
-        }
-        return NOT_STAR;
+public class StarDate {
+    private static final List<Integer> STAR_DATE
+            = List.of(3,10,17,24,25,31);
+
+
+    public static boolean checkStarDate(int date) {
+        return STAR_DATE.contains(date);
     }
+
 }

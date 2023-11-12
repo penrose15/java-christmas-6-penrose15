@@ -2,21 +2,35 @@ package christmas.domain.calendar;
 
 import christmas.domain.sale.BenefitCategory;
 
-public enum Week {
-    WEEKDAY,
-    WEEKEND;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 
-    public static Week determineWeek(int number) {
-        if(number > 5 && number <= 7) {
+import static christmas.domain.sale.BenefitCategory.WEEKDAY_SALE;
+import static christmas.domain.sale.BenefitCategory.WEEKEND_SALE;
+
+public enum Week {
+    WEEKDAY(WEEKDAY_SALE),
+    WEEKEND(WEEKEND_SALE);
+
+    private final BenefitCategory benefitCategory;
+
+    Week(BenefitCategory benefitCategory) {
+        this.benefitCategory = benefitCategory;
+    }
+
+    public static Week determineWeek(int date) {
+        LocalDate localDate = LocalDate.of(2023,12,date);
+        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+        int week = dayOfWeek.getValue();
+
+        if(week > 5 && week <= 7) {
             return WEEKEND;
         }
         return WEEKDAY;
     }
 
-    public BenefitCategory determineBenefitCategory() {
-        if(this.equals(WEEKDAY)) {
-            return BenefitCategory.WEEKDAY_SALE;
-        }
-        return BenefitCategory.WEEKEND_SALE;
+
+    public BenefitCategory getBenefitCategory() {
+        return benefitCategory;
     }
 }
