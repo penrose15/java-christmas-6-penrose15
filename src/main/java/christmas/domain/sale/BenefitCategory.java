@@ -1,7 +1,6 @@
 package christmas.domain.sale;
 
 import java.text.NumberFormat;
-import java.util.List;
 import java.util.Map;
 
 public enum BenefitCategory {
@@ -11,6 +10,9 @@ public enum BenefitCategory {
     SPECIAL_SALE("특별 할인"),
     GIVEAWAY_EVENT("증정 이벤트");
 
+    private static final String NO_BENEFIT = "없음";
+    private static final String PRICE_FORMAT = "%s: -%s원\n";
+
     private final String saleName;
 
     BenefitCategory(String saleName) {
@@ -18,16 +20,33 @@ public enum BenefitCategory {
     }
 
     public static String getBenefitDetailMessage(Map<BenefitCategory, Integer> benefitCategoryMap) {
+        String detailMessage = makeBenefitDetails(benefitCategoryMap);
+
+        if (detailMessage.isEmpty()) {
+            return NO_BENEFIT;
+        }
+
+        return detailMessage;
+    }
+
+    private static String makeBenefitDetails(Map<BenefitCategory, Integer> benefitCategoryMap) {
         StringBuilder detailMessage = new StringBuilder();
-        NumberFormat numberFormat = NumberFormat.getInstance();
+
 
         for (BenefitCategory benefitCategory : benefitCategoryMap.keySet()) {
             int salePrice = benefitCategoryMap.getOrDefault(benefitCategory, 0);
-            if(salePrice == 0) continue;
-            String cost = numberFormat.format(salePrice);
-            String message = String.format("%s: -%s원\n",benefitCategory.saleName, cost);
+            if (salePrice == 0) continue;
+
+            String message = makeBenefitDetail(benefitCategory, salePrice);
             detailMessage.append(message);
         }
         return detailMessage.toString();
+    }
+
+    private static String makeBenefitDetail(BenefitCategory benefitCategory, int salePrice) {
+        NumberFormat numberFormat = NumberFormat.getInstance();
+
+        String cost = numberFormat.format(salePrice);
+        return String.format(PRICE_FORMAT, benefitCategory.saleName, cost);
     }
 }
