@@ -1,7 +1,8 @@
 package christmas.domain.badge.Enum;
 
 public enum EventBadge {
-    STAR("별", 5_000)
+    NONE("없음", 0)
+    ,STAR("별", 5_000)
     ,TREE("트리", 10_000)
     ,SANTA("산타", 20_000)
     ;
@@ -22,7 +23,10 @@ public enum EventBadge {
         if(benefitPrice >= TREE.benefitPrice) {
             return TREE.badge;
         }
-        return STAR.badge;
+        if(benefitPrice >= STAR.benefitPrice) {
+            return STAR.badge;
+        }
+        return NONE.badge;
     }
 
     public static void validateBenefitPrice(int benefitPrice) {
