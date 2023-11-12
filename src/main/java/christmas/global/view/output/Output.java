@@ -1,4 +1,4 @@
-package christmas.global.view;
+package christmas.global.view.output;
 
 public interface Output {
     void println(Object message);

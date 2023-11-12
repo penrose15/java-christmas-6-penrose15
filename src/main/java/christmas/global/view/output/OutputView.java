@@ -1,4 +1,4 @@
-package christmas.global.view;
+package christmas.global.view.output;
 
 public class OutputView {
     public static void println(String message) {
