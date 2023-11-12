@@ -1,4 +1,4 @@
-package christmas.global.view;
+package christmas.global.view.message;
 
 import java.text.NumberFormat;
 

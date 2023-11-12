@@ -11,8 +11,8 @@ import christmas.global.view.message.OrderDynamicMessage;
 import christmas.global.view.message.OrderStaticMessage;
 import christmas.global.view.message.TitleMessage;
 
-import static christmas.global.view.PriceMessage.getDiscountPriceMessage;
-import static christmas.global.view.PriceMessage.getPriceMessage;
+import static christmas.global.view.message.PriceMessage.getDiscountPriceMessage;
+import static christmas.global.view.message.PriceMessage.getPriceMessage;
 import static christmas.global.view.message.TitleMessage.*;
 
 public class EventController {
