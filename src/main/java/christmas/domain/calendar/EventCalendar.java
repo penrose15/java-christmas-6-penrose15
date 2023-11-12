@@ -2,19 +2,14 @@ package christmas.domain.calendar;
 
 import christmas.domain.sale.ChristmasDDaySale;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-
 import static christmas.global.exception.DateExceptionMessage.INVALID_DATE;
 
 public class EventCalendar {
     private int date;
-    private LocalDate reservationDate;
 
     public void takeReservation(int date) {
         validateDateIsInRange(date);
         this.date = date;
-        reservationDate = toLocalDate(date);
     }
 
     private void validateDateIsInRange(int date) {
@@ -23,28 +18,21 @@ public class EventCalendar {
         }
     }
 
-    private LocalDate toLocalDate(int date) {
-        return LocalDate.of(2023,12,date);
+    public boolean checkChristmasIsInRange() {
+        if(date > 0 && date < 25) {
+            return true;
+        }
+        return false;
     }
+
 
     public Week checkWeekOrWeekend() {
-        int dayOfWeek = getDayOfWeek();
-        return Week.determineWeek(dayOfWeek);
+        return Week.determineWeek(date);
     }
 
-    private int getDayOfWeek() {
-        DayOfWeek dayOfWeek = reservationDate.getDayOfWeek();
-        return dayOfWeek.getValue();
-    }
-
-    public int calculateChristmasDDayEventSale() {
-        return ChristmasDDaySale.calculateSale(date);
-    }
 
     public boolean checkStarDate() {
-        int dayOfWeek = getDayOfWeek();
-        StarDate starDate = StarDate.checkStarDate(dayOfWeek);
-        return starDate.equals(StarDate.STAR);
+        return StarDate.checkStarDate(date);
     }
 
     public int getDate() {
