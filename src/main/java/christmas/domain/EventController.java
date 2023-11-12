@@ -6,12 +6,13 @@ import christmas.domain.order.Orders;
 import christmas.domain.sale.Giveaway;
 import christmas.domain.sale.Sale;
 import christmas.global.view.InputView;
-import christmas.global.view.Output;
 import christmas.global.view.OutputView;
 import christmas.global.view.message.OrderDynamicMessage;
 import christmas.global.view.message.OrderStaticMessage;
 import christmas.global.view.message.TitleMessage;
 
+import static christmas.global.view.PriceMessage.getDiscountPriceMessage;
+import static christmas.global.view.PriceMessage.getPriceMessage;
 import static christmas.global.view.message.TitleMessage.*;
 
 public class EventController {
@@ -32,13 +33,13 @@ public class EventController {
     }
 
     public void takeReservation() {
-        OutputView.outputView(OrderStaticMessage.START_MESSAGE.get());
-        OutputView.outputView(OrderStaticMessage.EXPECTED_VISIT_DATE.get());
+        OutputView.println(OrderStaticMessage.START_MESSAGE.get());
+        OutputView.println(OrderStaticMessage.EXPECTED_VISIT_DATE.get());
         inputVisitDate();
 
-        OutputView.outputView(OrderStaticMessage.ORDER_MENU.get());
+        OutputView.println(OrderStaticMessage.ORDER_MENU.get());
         inputOrders();
-        OutputView.outputView(OrderDynamicMessage.SHOW_EVENT.get(eventCalendar.getDate()));
+        OutputView.println(OrderDynamicMessage.SHOW_EVENT.get(eventCalendar.getDate()));
 
 
     }
@@ -54,8 +55,8 @@ public class EventController {
     }
 
     public void showOrderMenus() {
-        OutputView.outputView(TitleMessage.ORDER_MENU.get());
-        OutputView.outputView(orders.generateOrderedMenu());
+        OutputView.println(TitleMessage.ORDER_MENU.get());
+        OutputView.println(orders.generateOrderedMenu());
     }
 
     public void calculateSale() {
@@ -63,30 +64,29 @@ public class EventController {
 
         int totalPrice = sale.calculateTotalPrice();
 
-        String beforeSaleMessage = String.format("%s원", totalPrice);
-        OutputView.outputView(BEFORE_SALE_PRICE.get());
-        OutputView.outputView(beforeSaleMessage);
+        OutputView.println(BEFORE_SALE_PRICE.get());
+        OutputView.println(getPriceMessage(totalPrice));
 
         Giveaway giveaway = sale.isGiftTarget();
 
-        OutputView.outputView(GIVEAWAY_MENU.get());
-        OutputView.outputView(giveaway.getProduct());
+        OutputView.println(GIVEAWAY_MENU.get());
+        OutputView.println(giveaway.getProduct());
 
-        OutputView.outputView(BENEFIT.get());
+        OutputView.println(BENEFIT.get());
         String benefitDetails = sale.getTotalBenefitDetails();
-        OutputView.outputView(benefitDetails);
+        OutputView.println(benefitDetails);
 
         int totalBenefitAmount = sale.totalBenefitAmount();
-        OutputView.outputView(TOTAL_BENEFIT_AMOUNT.get());
-        OutputView.outputView("-" + totalBenefitAmount + "원");
+        OutputView.println(TOTAL_BENEFIT_AMOUNT.get());
+        OutputView.println(getDiscountPriceMessage(totalBenefitAmount));
 
-        OutputView.outputView(AFTER_SALE_PRICE.get());
+        OutputView.println(AFTER_SALE_PRICE.get());
         int totalFinalPrice = sale.calculateFinalAmount();
-        OutputView.outputView(totalFinalPrice + "원");
+        OutputView.println(getDiscountPriceMessage(totalFinalPrice));
 
         String badge = Badge.getBadge(sale);
 
-        OutputView.outputView(EVENT_BADGE.get());
-        OutputView.outputView(badge);
+        OutputView.println(EVENT_BADGE.get());
+        OutputView.println(badge);
     }
 }

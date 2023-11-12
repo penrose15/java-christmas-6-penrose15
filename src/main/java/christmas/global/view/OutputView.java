@@ -1,7 +1,7 @@
 package christmas.global.view;
 
 public class OutputView {
-    public static void outputView(String message) {
+    public static void println(String message) {
         System.out.println(message);
     }
 }
