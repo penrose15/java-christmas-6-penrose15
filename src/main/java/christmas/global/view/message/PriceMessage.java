@@ -3,8 +3,8 @@ package christmas.global.view.message;
 import java.text.NumberFormat;
 
 public class PriceMessage {
-    private static final String PRICE_FORMAT = "%s원";
-    private static final String DISCOUNT_FORMAT = "-%s원";
+    private static final String PRICE_FORMAT = "%s원\n";
+    private static final String DISCOUNT_FORMAT = "-%s원\n";
 
     public static String getPriceMessage(int price) {
         String formattedPrice = getFormattedMoney(price);

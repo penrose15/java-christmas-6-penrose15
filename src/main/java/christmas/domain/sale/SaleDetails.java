@@ -5,12 +5,13 @@ import christmas.domain.calendar.Week;
 import christmas.domain.order.Orders;
 import christmas.domain.order.food.FoodCategory;
 
+import java.util.EnumMap;
 import java.util.Map;
 
-import static christmas.domain.sale.BenefitCategory.CHRISTMAS_DDAY_SALE;
-import static christmas.domain.sale.BenefitCategory.SPECIAL_SALE;
+import static christmas.domain.sale.BenefitCategory.*;
 
 public class SaleDetails {
+    private static final int MINIMUM_TOTAL_PRICE = 10_000;
     private static final int SALE_PER_MENU = 2_023;
     private static final int STAR_DATE_SALE = 1_000;
 
@@ -30,7 +31,30 @@ public class SaleDetails {
         return orders.calculateTotalPrice();
     }
 
-    public Map<BenefitCategory, Integer> categorizeSaleAmount(Map<BenefitCategory, Integer> benefitCategoryMap) {
+    public int calculateTotalSaleAmount() {
+        Map<BenefitCategory, Integer> benefitCategoryMap = categorizeSaleAmount();
+
+        if (!checkTotalPriceMoreThanTenThousand()) return 0;
+
+        int totalSale = 0;
+        for (BenefitCategory benefitCategory : benefitCategoryMap.keySet()) {
+            int saleAmount = benefitCategoryMap.getOrDefault(benefitCategory, 0);
+            totalSale += saleAmount;
+        }
+        return totalSale;
+    }
+
+    private boolean checkTotalPriceMoreThanTenThousand() {
+        int totalPrice = calculateTotalPrice();
+        if (totalPrice < MINIMUM_TOTAL_PRICE) {
+            return false;
+        }
+        return true;
+    }
+
+    public Map<BenefitCategory, Integer> categorizeSaleAmount() {
+        Map<BenefitCategory, Integer> benefitCategoryMap = new EnumMap<>(BenefitCategory.class);
+
         calculateWeekSalePrice(benefitCategoryMap);
         calculateChristmasDdayEventSale(benefitCategoryMap);
         calculateStarDateSalePrice(benefitCategoryMap);

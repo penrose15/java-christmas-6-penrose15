@@ -11,7 +11,7 @@ public class Orders {
 
     private String orders;
 
-    public void validateOrders(String orders) {
+    public void takeOrders(String orders) {
         validateOrdersNotStartOrEndWithComma(orders);
         validateOrdersSeparatedWithHyphen(orders);
         this.orders = orders;
@@ -19,10 +19,10 @@ public class Orders {
 
     private void validateOrdersNotStartOrEndWithComma(String orders) {
         if(orders.startsWith(",")) {
-            throw new IllegalStateException(INVALID_FOOD_INPUT.get());
+            throw new IllegalArgumentException(INVALID_FOOD_INPUT.get());
         }
         if(orders.endsWith(",")) {
-            throw new IllegalStateException(INVALID_FOOD_INPUT.get());
+            throw new IllegalArgumentException(INVALID_FOOD_INPUT.get());
         }
     }
 
@@ -31,19 +31,18 @@ public class Orders {
         for (String order : orders) {
             try {
                 String[] orderInfo = order.split("-");
-                validateOrderFormat(orderInfo);
+                validateOrderCountIsNumber(orderInfo);
             } catch (Exception e) {
-                throw new IllegalStateException(INVALID_FOOD_INPUT.get());
+                throw new IllegalArgumentException(INVALID_FOOD_INPUT.get());
             }
         }
     }
 
-    private void validateOrderFormat(String[] order) {
-        String foodName = order[0];
+    private void validateOrderCountIsNumber(String[] order) {
         try {
             Integer.parseInt(order[1]);
         } catch (NumberFormatException e) {
-            throw new IllegalStateException(INVALID_FOOD_INPUT.get());
+            throw new IllegalArgumentException(INVALID_FOOD_INPUT.get());
         }
     }
 
