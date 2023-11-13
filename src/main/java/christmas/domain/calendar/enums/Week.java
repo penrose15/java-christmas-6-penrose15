@@ -1,4 +1,4 @@
-package christmas.domain.calendar;
+package christmas.domain.calendar.enums;
 
 import christmas.domain.sale.BenefitCategory;
 
@@ -23,7 +23,7 @@ public enum Week {
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
         int week = dayOfWeek.getValue();
 
-        if(week > 5 && week <= 7) {
+        if(week >= 5 && week < 7) {
             return WEEKEND;
         }
         return WEEKDAY;
