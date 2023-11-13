@@ -34,17 +34,6 @@ public enum Food {
         this.price = price;
     }
 
-    public FoodCategory getFoodCategory() {
-        return foodCategory;
-    }
-
-    public String getFood() {
-        return food;
-    }
-
-    public int getPrice() {
-        return price;
-    }
 
     public static Food findByFood(String food) {
         return Arrays.stream(Food.values())
@@ -95,7 +84,7 @@ public enum Food {
     }
 
 
-    public static Map<Food, Integer> toFoodMap(String orders) {
+    private static Map<Food, Integer> toFoodMap(String orders) {
         Map<Food, Integer> foodMap = new EnumMap<>(Food.class);
         List<String> orderList = Arrays.stream(orders.split(","))
                 .toList();
@@ -120,9 +109,22 @@ public enum Food {
         foodMap.put(food, count);
     }
 
+
     private static void validateDuplicateMenu(int count) {
         if(count != 0) {
             throw new IllegalArgumentException(INVALID_FOOD_INPUT.get());
         }
+    }
+
+    public FoodCategory getFoodCategory() {
+        return foodCategory;
+    }
+
+    public String getFood() {
+        return food;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
