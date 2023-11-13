@@ -1,10 +1,13 @@
 package christmas.domain.calendar;
 
-import christmas.domain.sale.ChristmasDDaySale;
+import christmas.domain.calendar.enums.Week;
 
 import static christmas.global.exception.DateExceptionMessage.INVALID_DATE;
 
 public class EventCalendar {
+    private static final int FIRST_DAY = 1;
+    private static final int THIRTY_ONE_DAY = 31;
+
     private int date;
 
     public void takeReservation(int date) {
@@ -13,16 +16,9 @@ public class EventCalendar {
     }
 
     private void validateDateIsInRange(int date) {
-        if(date < 0 || date > 31) {
+        if (date < FIRST_DAY || date > THIRTY_ONE_DAY) {
             throw new IllegalArgumentException(INVALID_DATE.get());
         }
-    }
-
-    public boolean checkChristmasIsInRange() {
-        if(date > 0 && date < 25) {
-            return true;
-        }
-        return false;
     }
 
 
