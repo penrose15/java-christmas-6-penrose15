@@ -1,92 +1,106 @@
 package christmas.domain;
 
-import christmas.domain.badge.Badge;
-import christmas.domain.calendar.EventCalendar;
-import christmas.domain.order.Orders;
-import christmas.domain.sale.Giveaway;
-import christmas.domain.sale.Sale;
-import christmas.global.view.input.InputView;
+import christmas.global.view.io.EventCalendarView;
+import christmas.global.view.io.OrdersView;
+import christmas.global.view.io.BenefitDetailsView;
 import christmas.global.view.output.OutputView;
-import christmas.global.view.message.OrderDynamicMessage;
-import christmas.global.view.message.OrderStaticMessage;
-import christmas.global.view.message.TitleMessage;
 
-import static christmas.global.view.message.PriceMessage.getDiscountPriceMessage;
-import static christmas.global.view.message.PriceMessage.getPriceMessage;
-import static christmas.global.view.message.TitleMessage.*;
+import static christmas.global.view.message.OrderDynamicMessage.SHOW_EVENT;
 
 public class EventController {
-    private final Orders orders;
-    private final EventCalendar eventCalendar;
-    private final Sale sale;
+    private final EventCalendarView eventCalendarView;
+    private final OrdersView ordersView;
+    private final BenefitDetailsView benefitDetailsView;
 
-    public EventController(Orders orders, EventCalendar eventCalendar) {
-        this.orders = orders;
-        this.eventCalendar = eventCalendar;
-        this.sale = new Sale(orders, eventCalendar);
+    public EventController(EventCalendarView eventCalendarView, OrdersView ordersView, BenefitDetailsView benefitDetailsView) {
+        this.eventCalendarView = eventCalendarView;
+        this.ordersView = ordersView;
+        this.benefitDetailsView = benefitDetailsView;
     }
 
     public void play() {
         takeReservation();
         showOrderMenus();
-        calculateSale();
+        showEventPreview();
     }
-
     public void takeReservation() {
-        OutputView.println(OrderStaticMessage.START_MESSAGE.get());
-        OutputView.println(OrderStaticMessage.EXPECTED_VISIT_DATE.get());
-        inputVisitDate();
+        int date = inputVisitDate();
 
-        OutputView.println(OrderStaticMessage.ORDER_MENU.get());
         inputOrders();
-        OutputView.println(OrderDynamicMessage.SHOW_EVENT.get(eventCalendar.getDate()));
-
-
+        OutputView.println(SHOW_EVENT.get(date));
     }
 
-    public void inputVisitDate() {
-        int date = InputView.inputNumber();
-        eventCalendar.takeReservation(date);
+    public int inputVisitDate() {
+        return eventCalendarView.inputVisitDate();
     }
 
     public void inputOrders() {
-        String inputOrders = InputView.input();
-        orders.validateOrders(inputOrders);
+        ordersView.inputOrders();
     }
 
     public void showOrderMenus() {
-        OutputView.println(TitleMessage.ORDER_MENU.get());
-        OutputView.println(orders.generateOrderedMenu());
+        ordersView.showOrderMenus();
     }
 
-    public void calculateSale() {
-        sale.categorizeTotalBenefit();
-
-        int totalPrice = sale.calculateTotalPrice();
-
-        OutputView.println(BEFORE_SALE_PRICE.get());
-        OutputView.println(getPriceMessage(totalPrice));
-
-        Giveaway giveaway = sale.isGiftTarget();
-
-        OutputView.println(GIVEAWAY_MENU.get());
-        OutputView.println(giveaway.getProduct());
-
-        OutputView.println(BENEFIT.get());
-        String benefitDetails = sale.getTotalBenefitDetails();
-        OutputView.println(benefitDetails);
-
-        int totalBenefitAmount = sale.totalBenefitAmount();
-        OutputView.println(TOTAL_BENEFIT_AMOUNT.get());
-        OutputView.println(getDiscountPriceMessage(totalBenefitAmount));
-
-        OutputView.println(AFTER_SALE_PRICE.get());
-        int totalFinalPrice = sale.calculateFinalAmount();
-        OutputView.println(getDiscountPriceMessage(totalFinalPrice));
-
-        String badge = Badge.getBadge(sale);
-
-        OutputView.println(EVENT_BADGE.get());
-        OutputView.println(badge);
+    public void showEventPreview() {
+        benefitDetailsView.showEventPreview();
     }
+
+//    public void takeReservation() {
+//        OutputView.println(START_MESSAGE.get());
+//        OutputView.println(EXPECTED_VISIT_DATE.get());
+//        int date = inputVisitDate();
+//
+//        OutputView.println(ORDER_MENU.get());
+//        inputOrders();
+//        OutputView.println(SHOW_EVENT.get(date));
+//    }
+//
+//    public int inputVisitDate() {
+//        int date = InputView.inputNumber();
+//        eventCalendar.takeReservation(date);
+//
+//        return date;
+//    }
+//
+//    public void inputOrders() {
+//        String inputOrders = InputView.input();
+//        orders.takeOrders(inputOrders);
+//    }
+//
+//    public void showOrderMenus() {
+//        OutputView.println(TitleMessage.ORDER_MENU.get());
+//        OutputView.println(orders.generateOrderedMenu());
+//    }
+//
+//    public void calculateSale() {
+//        benefitDetails.categorizeTotalBenefit();
+//
+//        int totalPrice = benefitDetails.calculateTotalPrice();
+//
+//        OutputView.println(BEFORE_SALE_PRICE.get());
+//        OutputView.println(getPriceMessage(totalPrice));
+//
+//        Giveaway giveaway = benefitDetails.calculateFreeGiftPrice();
+//
+//        OutputView.println(GIVEAWAY_MENU.get());
+//        OutputView.println(giveaway.getProduct());
+//
+//        OutputView.println(BENEFIT.get());
+//        String benefitDetails = this.benefitDetails.getTotalBenefitDetails();
+//        OutputView.println(benefitDetails);
+//
+//        int totalBenefitAmount = this.benefitDetails.calculateTotalBenefit();
+//        OutputView.println(TOTAL_BENEFIT_AMOUNT.get());
+//        OutputView.println(getDiscountPriceMessage(totalBenefitAmount));
+//
+//        OutputView.println(AFTER_SALE_PRICE.get());
+//        int totalFinalPrice = this.benefitDetails.calculateFinalAmount();
+//        OutputView.println(getDiscountPriceMessage(totalFinalPrice));
+//
+//        String badge = Badge.getBadge(this.benefitDetails);
+//
+//        OutputView.println(EVENT_BADGE.get());
+//        OutputView.println(badge);
+//    }
 }
