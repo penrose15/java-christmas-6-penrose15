@@ -1,12 +1,12 @@
-package christmas.domain.sale;
+package christmas.domain.sale.enums;
 
-import christmas.domain.calendar.Week;
+import christmas.domain.calendar.enums.Week;
 import christmas.domain.order.food.FoodCategory;
 
 import java.util.Arrays;
 
-import static christmas.domain.calendar.Week.WEEKDAY;
-import static christmas.domain.calendar.Week.WEEKEND;
+import static christmas.domain.calendar.enums.Week.WEEKDAY;
+import static christmas.domain.calendar.enums.Week.WEEKEND;
 import static christmas.domain.order.food.FoodCategory.DESSERT;
 import static christmas.domain.order.food.FoodCategory.MAIN_DISH;
 

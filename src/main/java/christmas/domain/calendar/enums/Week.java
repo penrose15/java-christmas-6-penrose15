@@ -1,12 +1,12 @@
 package christmas.domain.calendar.enums;
 
-import christmas.domain.sale.BenefitCategory;
+import christmas.domain.sale.enums.BenefitCategory;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-import static christmas.domain.sale.BenefitCategory.WEEKDAY_SALE;
-import static christmas.domain.sale.BenefitCategory.WEEKEND_SALE;
+import static christmas.domain.sale.enums.BenefitCategory.WEEKDAY_SALE;
+import static christmas.domain.sale.enums.BenefitCategory.WEEKEND_SALE;
 
 public enum Week {
     WEEKDAY(WEEKDAY_SALE),

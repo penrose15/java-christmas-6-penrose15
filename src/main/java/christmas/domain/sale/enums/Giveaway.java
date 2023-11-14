@@ -1,4 +1,4 @@
-package christmas.domain.sale;
+package christmas.domain.sale.enums;
 
 public enum Giveaway {
     CHAMPAGNE("샴페인 1개\n",120_000, 25_000),

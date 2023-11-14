@@ -2,7 +2,7 @@ package christmas.global.view.io;
 
 import christmas.domain.badge.Enum.EventBadge;
 import christmas.domain.sale.BenefitDetails;
-import christmas.domain.sale.Giveaway;
+import christmas.domain.sale.enums.Giveaway;
 import christmas.global.view.output.OutputView;
 
 import static christmas.global.view.message.PriceMessage.getDiscountPriceMessage;

@@ -1,14 +1,16 @@
 package christmas.domain.sale;
 
 import christmas.domain.calendar.EventCalendar;
-import christmas.domain.calendar.Week;
+import christmas.domain.calendar.enums.Week;
 import christmas.domain.order.Orders;
 import christmas.domain.order.food.FoodCategory;
+import christmas.domain.sale.enums.BenefitCategory;
+import christmas.domain.sale.enums.SaleTarget;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-import static christmas.domain.sale.BenefitCategory.*;
+import static christmas.domain.sale.enums.BenefitCategory.*;
 
 public class SaleDetails {
     private static final int MINIMUM_TOTAL_PRICE = 10_000;

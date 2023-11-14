@@ -1,4 +1,4 @@
-package christmas.domain.sale;
+package christmas.domain.sale.enums;
 
 import java.text.NumberFormat;
 import java.util.Map;
@@ -31,7 +31,6 @@ public enum BenefitCategory {
 
     private static String makeBenefitDetails(Map<BenefitCategory, Integer> benefitCategoryMap) {
         StringBuilder detailMessage = new StringBuilder();
-
 
         for (BenefitCategory benefitCategory : benefitCategoryMap.keySet()) {
             int salePrice = benefitCategoryMap.getOrDefault(benefitCategory, 0);

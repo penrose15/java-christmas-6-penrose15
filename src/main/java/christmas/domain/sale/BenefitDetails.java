@@ -1,5 +1,8 @@
 package christmas.domain.sale;
 
+import christmas.domain.sale.enums.BenefitCategory;
+import christmas.domain.sale.enums.Giveaway;
+
 import java.util.Map;
 
 public class BenefitDetails {
