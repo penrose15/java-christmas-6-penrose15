@@ -1,6 +1,7 @@
 package christmas.global.view.io;
 
 import christmas.domain.order.Orders;
+import christmas.domain.order.dto.OrdersDto;
 import christmas.global.view.input.InputView;
 import christmas.global.view.output.OutputView;
 
@@ -18,7 +19,9 @@ public class OrdersView implements InteractionRepeatable{
         OutputView.println(ORDER_MENU_AND_COUNT.get());
         runInteraction(() ->  {
             String inputOrders = InputView.input();
-            orders.takeOrders(inputOrders);
+            OrdersDto ordersDto = new OrdersDto(inputOrders);
+
+            orders.takeOrders(ordersDto.orders());
         });
     }
 
