@@ -9,7 +9,6 @@ public class BenefitDetails {
 
     int totalPrice;
     int totalSaleAmount;
-    int totalBenefitAmount;
     private final SaleDetails saleDetails;
 
     public BenefitDetails(SaleDetails saleDetails) {
@@ -28,17 +27,16 @@ public class BenefitDetails {
         return totalPrice - totalSaleAmount;
     }
 
-    public void calculateTotalBenefitAmount() {
+    public int calculateTotalBenefitAmount() {
         Giveaway giveaway = calculateFreeGiftPrice();
 
         int freeGiftPrice = giveaway.getProductPrice();
-        this.totalBenefitAmount = totalSaleAmount + freeGiftPrice;
+        return totalSaleAmount + freeGiftPrice;
     }
 
     public String getTotalBenefitMessage() {
         Map<BenefitCategory, Integer> benefitCategoryMap = saleDetails.categorizeSaleAmount();
         Giveaway giveaway = calculateFreeGiftPrice();
-
         benefitCategoryMap.put(BenefitCategory.GIVEAWAY_EVENT, giveaway.getProductPrice());
 
         return BenefitCategory.getBenefitDetailMessage(benefitCategoryMap);
@@ -50,9 +48,5 @@ public class BenefitDetails {
 
     public int getTotalPrice() {
         return totalPrice;
-    }
-
-    public int getTotalBenefitAmount() {
-        return totalBenefitAmount;
     }
 }

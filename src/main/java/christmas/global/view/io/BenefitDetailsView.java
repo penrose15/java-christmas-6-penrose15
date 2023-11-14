@@ -18,11 +18,7 @@ public class BenefitDetailsView implements InteractionRepeatable{
 
     public void showEventPreview() {
         calculateTotalPrice();
-        showFreeGift();
-        showTotalBenefitDetails();
-        showTotalBenefitAmount();
-        showFinalTotalPrice();
-        showBadge();
+        showResult();
     }
 
     public void calculateTotalPrice() {
@@ -35,36 +31,43 @@ public class BenefitDetailsView implements InteractionRepeatable{
         OutputView.println(getPriceMessage(totalPrice));
     }
 
-    public void showFreeGift() {
+    public void showResult() {
+        showFreeGift();
+        showTotalBenefitDetails();
+        int totalBenefitAmount = showTotalBenefitAmount();
+        showFinalTotalPrice();
+        showBadge(totalBenefitAmount);
+    }
+
+    private void showFreeGift() {
         Giveaway giveaway = benefitDetails.calculateFreeGiftPrice();
 
         OutputView.println(GIVEAWAY_MENU.get());
         OutputView.println(giveaway.getProduct());
-        OutputView.println("");
+        OutputView.printNextLine();
     }
 
-    public void showTotalBenefitDetails() {
+    private void showTotalBenefitDetails() {
         OutputView.println(BENEFIT.get());
         String benefitDetails = this.benefitDetails.getTotalBenefitMessage();
         OutputView.println(benefitDetails);
     }
 
-    public void showTotalBenefitAmount() {
-        benefitDetails.calculateTotalBenefitAmount();
-        int totalBenefitAmount = benefitDetails.getTotalBenefitAmount();
+    private int showTotalBenefitAmount() {
+        int totalBenefitAmount = benefitDetails.calculateTotalBenefitAmount();
         OutputView.println(TOTAL_BENEFIT_AMOUNT.get());
         OutputView.println(getDiscountPriceMessage(totalBenefitAmount));
+
+        return totalBenefitAmount;
     }
 
-    public void showFinalTotalPrice() {
+    private void showFinalTotalPrice() {
         OutputView.println(AFTER_SALE_PRICE.get());
         int totalFinalPrice = this.benefitDetails.calculateFinalPrice();
         OutputView.println(getPriceMessage(totalFinalPrice));
     }
 
-    public void showBadge() {
-        int totalBenefitAmount = benefitDetails.getTotalBenefitAmount();
-
+    private void showBadge(int totalBenefitAmount) {
         String badge = EventBadge.getBadge(totalBenefitAmount);
         OutputView.println(EVENT_BADGE.get());
         OutputView.println(badge);
