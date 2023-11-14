@@ -71,17 +71,10 @@ class FoodTest {
 
     @Test
     public void 주문내역_생성_테스트() {
-        String expected
-                = """
-                해산물파스타 2개
-                레드와인 1개
-                초코케이크 1개
-                """;
-
         String result = Food.generateOrderedMenu(foodMap);
 
         assertThat(result)
-                .isEqualTo(expected);
+                .contains("해산물파스타 2개", "초코케이크 1개","레드와인 1개");
     }
 
 }

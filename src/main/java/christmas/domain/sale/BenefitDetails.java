@@ -6,7 +6,6 @@ import christmas.domain.sale.enums.Giveaway;
 import java.util.Map;
 
 public class BenefitDetails {
-    private static final int MINIMUM_TOTAL_PRICE = 10_000;
 
     int totalPrice;
     int totalSaleAmount;
