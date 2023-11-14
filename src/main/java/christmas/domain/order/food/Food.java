@@ -1,11 +1,9 @@
 package christmas.domain.order.food;
 
-import christmas.global.exception.OrderExceptionMessage;
-
 import java.util.*;
 
 import static christmas.domain.order.food.FoodCategory.*;
-import static christmas.global.exception.OrderExceptionMessage.INVALID_FOOD_INPUT;
+import static christmas.global.exception.OrderExceptionMessage.INVALID_ORDERS;
 
 public enum Food {
     양송이수프(APPETIZER,"양송이수프", 6000),
@@ -39,13 +37,12 @@ public enum Food {
         return Arrays.stream(Food.values())
                 .filter(f -> f.food.equals(food))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_FOOD_INPUT.get()));
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDERS.get()));
     }
 
-    public static Map<FoodCategory, Integer> sortByFoodCategory(String orders) {
+    public static Map<FoodCategory, Integer> sortByFoodCategory(Map<Food, Integer> foodMap) {
         Map<FoodCategory, Integer> foodCategoryMap = new EnumMap<>(FoodCategory.class);
 
-        Map<Food, Integer> foodMap = toFoodMap(orders);
         for (Food food : foodMap.keySet()) {
             FoodCategory foodCategory = food.foodCategory;
             int count = foodCategoryMap.getOrDefault(foodCategory, 0);
@@ -57,8 +54,7 @@ public enum Food {
         return foodCategoryMap;
     }
 
-    public static int calculateTotalPrice(String orders) {
-        Map<Food, Integer> foodMap = toFoodMap(orders);
+    public static int calculateTotalPrice(Map<Food, Integer> foodMap) {
         int totalPrice = 0;
 
         for (Food food : foodMap.keySet()) {
@@ -70,9 +66,9 @@ public enum Food {
         return totalPrice;
     }
 
-    public static String generateOrderedMenu(String orders) {
+    public static String generateOrderedMenu(Map<Food, Integer> foodMap) {
         StringBuilder menu = new StringBuilder();
-        Map<Food, Integer> foodMap = toFoodMap(orders);
+
         for (Food food : foodMap.keySet()) {
             String foodName = food.food;
             int count = foodMap.get(food);
@@ -81,39 +77,6 @@ public enum Food {
         }
         return menu.toString();
 
-    }
-
-
-    private static Map<Food, Integer> toFoodMap(String orders) {
-        Map<Food, Integer> foodMap = new EnumMap<>(Food.class);
-        List<String> orderList = Arrays.stream(orders.split(","))
-                .toList();
-
-        orderList.stream()
-                .map(String::trim)
-                .forEach(o -> {
-                    sortByFoods(foodMap, o);
-                });
-
-        return foodMap;
-    }
-
-    private static void sortByFoods(Map<Food, Integer> foodMap, String o) {
-        String[] order = o.split("-");
-        Food food = findByFood(order[0]);
-        int foodCount = Integer.parseInt(order[1]);
-
-        int count = foodMap.getOrDefault(food, 0);
-        validateDuplicateMenu(count);
-        count += foodCount;
-        foodMap.put(food, count);
-    }
-
-
-    private static void validateDuplicateMenu(int count) {
-        if(count != 0) {
-            throw new IllegalArgumentException(INVALID_FOOD_INPUT.get());
-        }
     }
 
     public FoodCategory getFoodCategory() {
