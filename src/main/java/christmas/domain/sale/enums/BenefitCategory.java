@@ -48,4 +48,11 @@ public enum BenefitCategory {
         String cost = numberFormat.format(salePrice);
         return String.format(PRICE_FORMAT, benefitCategory.saleName, cost);
     }
+
+    @Override
+    public String toString() {
+        return "BenefitCategory{" +
+                "saleName='" + saleName + '\'' +
+                '}';
+    }
 }
