@@ -1,6 +1,7 @@
 package christmas.global.view.io;
 
 import christmas.domain.calendar.EventCalendar;
+import christmas.domain.calendar.dto.DateDto;
 import christmas.global.view.input.InputView;
 import christmas.global.view.output.OutputView;
 
@@ -19,10 +20,10 @@ public class EventCalendarView implements InteractionRepeatable{
         OutputView.println(EXPECTED_VISIT_DATE.get());
 
         return supplyInteraction(() -> {
-            int date = InputView.inputNumber();
-            eventCalendar.takeReservation(date);
+            String input = InputView.input();
+            DateDto dateDto = new DateDto(input);
 
-            return date;
+            return eventCalendar.takeReservation(dateDto.date());
         });
     }
 }

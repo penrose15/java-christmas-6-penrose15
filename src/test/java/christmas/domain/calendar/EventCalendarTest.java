@@ -27,7 +27,7 @@ class EventCalendarTest {
 
     @Test
     void 날짜가_1일_미만인_경우_예외_처리_테스트() {
-        int date = 0;
+        String date = "0";
         assertThatThrownBy(() -> eventCalendar.takeReservation(date))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_DATE.get());
@@ -35,7 +35,7 @@ class EventCalendarTest {
 
     @Test
     void 날짜가_31일_초과인_경우_예외_처리_테스트() {
-        int date = 32;
+        String date = "32";
         assertThatThrownBy(() -> eventCalendar.takeReservation(date))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_DATE.get());
@@ -43,7 +43,7 @@ class EventCalendarTest {
 
     @Test
     void 날짜가_주말이라면_주말이라고_판별() {
-        eventCalendar.takeReservation(1);
+        eventCalendar.takeReservation("1");
         Week week = eventCalendar.checkWeekOrWeekend();
 
         assertThat(week)
@@ -52,7 +52,7 @@ class EventCalendarTest {
 
     @Test
     void 날짜가_평일이라면_평일이라고_판별() {
-        eventCalendar.takeReservation(4);
+        eventCalendar.takeReservation("4");
         Week week = eventCalendar.checkWeekOrWeekend();
 
         assertThat(week)
@@ -64,7 +64,7 @@ class EventCalendarTest {
 
 
         for (Integer starDate : starDates) {
-            eventCalendar.takeReservation(starDate);
+            eventCalendar.takeReservation(starDate.toString());
             boolean isStarDate = eventCalendar.checkStarDate();
 
             assertThat(isStarDate)
@@ -83,7 +83,7 @@ class EventCalendarTest {
         }
 
         for (Integer starDate : notStarDates) {
-            eventCalendar.takeReservation(starDate);
+            eventCalendar.takeReservation(starDate.toString());
             boolean isStarDate = eventCalendar.checkStarDate();
 
             assertThat(isStarDate)

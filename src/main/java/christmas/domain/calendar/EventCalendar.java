@@ -1,6 +1,7 @@
 package christmas.domain.calendar;
 
 import christmas.domain.calendar.enums.Week;
+import christmas.domain.calendar.converter.DateConverter;
 
 import static christmas.global.exception.DateExceptionMessage.INVALID_DATE;
 
@@ -10,9 +11,11 @@ public class EventCalendar {
 
     private int date;
 
-    public void takeReservation(int date) {
-        validateDateIsInRange(date);
-        this.date = date;
+    public int takeReservation(String date) {
+        this.date = DateConverter.convertToDate(date);
+        validateDateIsInRange(this.date);
+
+        return this.date;
     }
 
     private void validateDateIsInRange(int date) {
