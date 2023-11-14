@@ -42,6 +42,24 @@ class OrdersTest {
     }
 
     @Test
+    void 음식수량_20개_초과시_예외처리_테스트() {
+        String input = "양송이수프-5,티본스테이크-7,제로콜라-8,레드와인-3,샴페인-9";
+
+        assertThatThrownBy(() -> orders.takeOrders(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_ORDERS.get());
+    }
+
+    @Test
+    void 수량이_0인경우_예외처리_테스트() {
+        String input = "양송이수프-2,티본스테이크-0,양송이수프-1";
+
+        assertThatThrownBy(() -> orders.takeOrders(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_ORDERS.get());
+    }
+
+    @Test
     void 주문_중복시_예외처리_테스트() {
         String input = "양송이수프-2,티본스테이크-1,양송이수프-1";
 
