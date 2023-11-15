@@ -67,4 +67,13 @@ class OrdersTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_ORDERS.get());
     }
+
+    @Test
+    void 음료만_주문시_예외처리_테스트() {
+        String input = "레드와인-3,제로콜라-2";
+
+        assertThatThrownBy(() -> orders.takeOrders(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_ORDERS.get());
+    }
 }
