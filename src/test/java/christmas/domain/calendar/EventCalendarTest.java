@@ -22,7 +22,7 @@ class EventCalendarTest {
 
     @BeforeEach
     void setUp() {
-        eventCalendar = new EventCalendar();
+        eventCalendar = EventCalendar.getInstance();
     }
 
     @Test

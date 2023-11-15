@@ -9,49 +9,30 @@ import christmas.domain.sale.SaleDetails;
 import christmas.global.view.io.BenefitDetailsView;
 import christmas.global.view.io.EventCalendarView;
 import christmas.global.view.io.OrdersView;
-import org.junit.jupiter.api.Order;
 
 public class Dependency {
     public static EventController eventController() {
-        Orders orders = orders();
-        EventCalendar eventCalendar = eventCalendar();
-
-        SaleDetails saleDetails = saleDetails(orders, eventCalendar, christmasDDaySale());
-
-        return new EventController(eventCalendarView(eventCalendar),
-                ordersView(orders),
-                benefitDetailsView(benefitDetails(saleDetails)));
+        return new EventController(eventCalendarView(), ordersView(), benefitDetailsView());
     }
 
-    public static BenefitDetailsView benefitDetailsView(BenefitDetails benefitDetails) {
-        return new BenefitDetailsView(benefitDetails);
+    public static BenefitDetailsView benefitDetailsView() {
+        return new BenefitDetailsView(benefitDetails());
     }
 
-    public static OrdersView ordersView(Orders orders) {
-        return new OrdersView(orders);
+    public static OrdersView ordersView() {
+        return new OrdersView(Orders.getInstance());
     }
 
-    public static EventCalendarView eventCalendarView(EventCalendar eventCalendar) {
-        return new EventCalendarView(eventCalendar);
+    public static EventCalendarView eventCalendarView() {
+        return new EventCalendarView(EventCalendar.getInstance());
     }
 
-    public static BenefitDetails benefitDetails(SaleDetails saleDetails) {
-        return new BenefitDetails(saleDetails);
+    public static BenefitDetails benefitDetails() {
+        return new BenefitDetails(saleDetails());
     }
 
-    public static SaleDetails saleDetails(Orders orders, EventCalendar eventCalendar, ChristmasDDaySale christmasDDaySale) {
-        return new SaleDetails(orders, eventCalendar, christmasDDaySale);
+    public static SaleDetails saleDetails() {
+        return new SaleDetails(Orders.getInstance(), EventCalendar.getInstance(), ChristmasDDaySale.getInstance());
     }
 
-    public static ChristmasDDaySale christmasDDaySale() {
-        return new ChristmasDDaySale();
-    }
-
-    public static EventCalendar eventCalendar() {
-        return new EventCalendar();
-    }
-
-    public static Orders orders() {
-        return new Orders();
-    }
 }

@@ -19,9 +19,9 @@ class SaleDetailsTest {
     SaleDetails saleDetails;
     @BeforeEach
     void setUp() {
-        orders = new Orders();
-        eventCalendar = new EventCalendar();
-        christmasDDaySale = new ChristmasDDaySale();
+        orders = Orders.getInstance();
+        eventCalendar = EventCalendar.getInstance();
+        christmasDDaySale = ChristmasDDaySale.getInstance();
 
         saleDetails = new SaleDetails(orders, eventCalendar, christmasDDaySale);
     }

@@ -14,6 +14,15 @@ public class Orders {
 
     private Map<Food, Integer> orderMap;
 
+    private static final Orders instance = new Orders();
+
+    private Orders() {}
+
+    public static Orders getInstance() {
+        return instance;
+    }
+
+
     public void takeOrders(String orders) {
         orderMap = separateByFood(orders);
     }

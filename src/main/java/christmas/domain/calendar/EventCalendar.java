@@ -11,6 +11,14 @@ public class EventCalendar {
 
     private int date;
 
+    private static final EventCalendar INSTANCE = new EventCalendar();
+
+    private EventCalendar() {}
+
+    public static EventCalendar getInstance() {
+        return INSTANCE;
+    }
+
     public int takeReservation(String date) {
         this.date = DateConverter.convertToDate(date);
         validateDateIsInRange(this.date);

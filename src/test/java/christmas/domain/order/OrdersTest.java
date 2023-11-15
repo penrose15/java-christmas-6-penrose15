@@ -3,6 +3,7 @@ package christmas.domain.order;
 import christmas.domain.order.food.Food;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Or;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ class OrdersTest {
 
     @BeforeEach
     void setUp() {
-        orders = new Orders();
+        orders = Orders.getInstance();
     }
 
     @Test
