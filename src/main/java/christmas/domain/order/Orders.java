@@ -27,6 +27,7 @@ public class Orders {
                 .map(String::trim)
                 .forEach(o -> sortByFoods(foodMap, o));
         validateOrdersQuantityIsInRange(foodMap);
+        validateOrdersConsistOfDrinkOnly(foodMap);
         return foodMap;
     }
 
@@ -65,6 +66,23 @@ public class Orders {
         if(totalQuantity > MAX_ORDER_QUANTITY) {
             throw new IllegalArgumentException(INVALID_ORDERS.get());
         }
+    }
+
+    private void validateOrdersConsistOfDrinkOnly(Map<Food, Integer> foodMap) {
+        int notDrinkCount = 0;
+        for (Food food : foodMap.keySet()) {
+            notDrinkCount = countNotDrinkCategory(notDrinkCount, food);
+        }
+        if(notDrinkCount == 0) {
+            throw new IllegalArgumentException(INVALID_ORDERS.get());
+        }
+    }
+
+    private int countNotDrinkCategory(int notDrinkCount, Food food) {
+        if(!food.getFoodCategory().equals(FoodCategory.DRINK)) {
+            notDrinkCount += 1;
+        }
+        return notDrinkCount;
     }
 
     public Map<FoodCategory, Integer> sortByFoodCategory() {
