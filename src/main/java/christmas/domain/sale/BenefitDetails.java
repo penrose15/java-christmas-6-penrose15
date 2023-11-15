@@ -6,6 +6,7 @@ import christmas.domain.sale.enums.Giveaway;
 import java.util.Map;
 
 public class BenefitDetails {
+    private final String NO_BENEFIT = "없음\n";
 
     int totalPrice;
     int totalSaleAmount;
@@ -35,6 +36,10 @@ public class BenefitDetails {
     }
 
     public String getTotalBenefitMessage() {
+        if(totalPrice < 10_000) {
+            return NO_BENEFIT;
+        }
+
         Map<BenefitCategory, Integer> benefitCategoryMap = saleDetails.categorizeSaleAmount();
         Giveaway giveaway = calculateFreeGiftPrice();
         benefitCategoryMap.put(BenefitCategory.GIVEAWAY_EVENT, giveaway.getProductPrice());
