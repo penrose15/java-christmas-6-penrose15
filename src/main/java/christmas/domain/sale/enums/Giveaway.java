@@ -1,8 +1,8 @@
 package christmas.domain.sale.enums;
 
 public enum Giveaway {
-    CHAMPAGNE("샴페인 1개\n",120_000, 25_000),
-    NONE("없음\n",0, 0);
+    CHAMPAGNE("샴페인 1개",120_000, 25_000),
+    NONE("없음",0, 0);
 
     private final String product;
     private final int criteriaAmount;
