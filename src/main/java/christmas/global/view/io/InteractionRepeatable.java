@@ -4,6 +4,8 @@ import christmas.global.view.output.OutputView;
 
 import java.util.function.Supplier;
 
+import static christmas.global.exception.CommonExceptionMessage.EXCEPTION_PREFIX;
+
 public interface InteractionRepeatable {
 
     default void runInteraction(final Runnable runnable) {
@@ -12,7 +14,7 @@ public interface InteractionRepeatable {
                 runnable.run();
                 break;
             } catch (IllegalArgumentException e) {
-                OutputView.println(e.getMessage());
+                OutputView.println(EXCEPTION_PREFIX.get() + e.getMessage());
             }
         }
     }
@@ -22,7 +24,7 @@ public interface InteractionRepeatable {
             try {
                 return supplier.get();
             } catch (IllegalArgumentException e) {
-                OutputView.println(e.getMessage());
+                OutputView.println(EXCEPTION_PREFIX.get() + e.getMessage());
             }
         }
     }
