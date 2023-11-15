@@ -49,4 +49,8 @@ public class BenefitDetails {
     public int getTotalPrice() {
         return totalPrice;
     }
+
+    public int getTotalSaleAmount() {
+        return totalSaleAmount;
+    }
 }
