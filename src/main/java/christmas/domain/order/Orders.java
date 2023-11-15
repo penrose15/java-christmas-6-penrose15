@@ -1,16 +1,16 @@
 package christmas.domain.order;
 
-import christmas.domain.order.food.Food;
-import christmas.domain.order.food.FoodCategory;
+import christmas.domain.order.enums.food.Food;
+import christmas.domain.order.enums.food.FoodCategory;
 
 import java.util.*;
 
 import static christmas.global.exception.OrderExceptionMessage.INVALID_ORDERS;
+import static christmas.domain.order.enums.OrderNumberDefinition.MAX_ORDER_QUANTITY;
 
 public class Orders {
     private static final String SEPARATOR = ",";
     private static final String HYPHEN = "-";
-    private static final int MAX_ORDER_QUANTITY = 20;
 
     private Map<Food, Integer> orderMap;
 
@@ -72,7 +72,7 @@ public class Orders {
         for (Integer value : foodMap.values()) {
             totalQuantity += value;
         }
-        if(totalQuantity > MAX_ORDER_QUANTITY) {
+        if(totalQuantity > MAX_ORDER_QUANTITY.get()) {
             throw new IllegalArgumentException(INVALID_ORDERS.get());
         }
     }

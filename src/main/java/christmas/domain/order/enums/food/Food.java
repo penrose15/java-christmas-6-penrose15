@@ -1,26 +1,25 @@
-package christmas.domain.order.food;
+package christmas.domain.order.enums.food;
 
 import java.util.*;
 
-import static christmas.domain.order.food.FoodCategory.*;
 import static christmas.global.exception.OrderExceptionMessage.INVALID_ORDERS;
 
 public enum Food {
-    양송이수프(APPETIZER,"양송이수프", 6000),
-    타파스(APPETIZER, "타파스", 5500),
-    시저샐러드(APPETIZER, "시저샐러드", 8000),
+    양송이수프(FoodCategory.APPETIZER,"양송이수프", 6000),
+    타파스(FoodCategory.APPETIZER, "타파스", 5500),
+    시저샐러드(FoodCategory.APPETIZER, "시저샐러드", 8000),
 
-    티본스테이크(MAIN_DISH, "티본스테이크", 55000),
-    바비큐립(MAIN_DISH, "바비큐립", 54000),
-    해산물파스타(MAIN_DISH, "해산물파스타",35000),
-    크리스마스파스타(MAIN_DISH, "크리스마스파스타",25000),
+    티본스테이크(FoodCategory.MAIN_DISH, "티본스테이크", 55000),
+    바비큐립(FoodCategory.MAIN_DISH, "바비큐립", 54000),
+    해산물파스타(FoodCategory.MAIN_DISH, "해산물파스타",35000),
+    크리스마스파스타(FoodCategory.MAIN_DISH, "크리스마스파스타",25000),
 
-    초코케이크(DESSERT, "초코케이크",15000),
-    아이스크림(DESSERT, "아이스크림",5000),
+    초코케이크(FoodCategory.DESSERT, "초코케이크",15000),
+    아이스크림(FoodCategory.DESSERT, "아이스크림",5000),
 
-    제로콜라(DRINK, "제로콜라",3000),
-    레드와인(DRINK, "레드와인",60000),
-    샴페인(DRINK, "샴페인",25000);
+    제로콜라(FoodCategory.DRINK, "제로콜라",3000),
+    레드와인(FoodCategory.DRINK, "레드와인",60000),
+    샴페인(FoodCategory.DRINK, "샴페인",25000);
 
     private final FoodCategory foodCategory;
     private final String food;

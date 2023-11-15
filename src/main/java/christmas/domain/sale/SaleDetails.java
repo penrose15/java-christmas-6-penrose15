@@ -3,7 +3,7 @@ package christmas.domain.sale;
 import christmas.domain.calendar.EventCalendar;
 import christmas.domain.calendar.enums.Week;
 import christmas.domain.order.Orders;
-import christmas.domain.order.food.FoodCategory;
+import christmas.domain.order.enums.food.FoodCategory;
 import christmas.domain.sale.enums.BenefitCategory;
 import christmas.domain.sale.enums.SaleTarget;
 

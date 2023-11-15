@@ -10,7 +10,7 @@ public record DateDto(String date) {
     }
 
     private void validateDateIsNotNull(String date) {
-        if(date == null) {
+        if (date == null) {
             throw new IllegalArgumentException(INVALID_DATE.get());
         }
     }

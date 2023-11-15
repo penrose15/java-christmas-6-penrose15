@@ -7,10 +7,12 @@ import java.time.LocalDate;
 
 import static christmas.domain.sale.enums.BenefitCategory.WEEKDAY_SALE;
 import static christmas.domain.sale.enums.BenefitCategory.WEEKEND_SALE;
+import static christmas.domain.calendar.enums.YearMonthDateDefinition.*;
 
 public enum Week {
     WEEKDAY(WEEKDAY_SALE),
     WEEKEND(WEEKEND_SALE);
+
 
     private final BenefitCategory benefitCategory;
 
@@ -19,11 +21,11 @@ public enum Week {
     }
 
     public static Week determineWeek(int date) {
-        LocalDate localDate = LocalDate.of(2023,12,date);
+        LocalDate localDate = LocalDate.of(YEAR.get(), MONTH.get(), date);
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
         int week = dayOfWeek.getValue();
 
-        if(week >= 5 && week < 7) {
+        if (week >= WEEKEND_START.get() && week <= WEEKEND_END.get()) {
             return WEEKEND;
         }
         return WEEKDAY;

@@ -1,14 +1,14 @@
 package christmas.domain.sale.enums;
 
 import christmas.domain.calendar.enums.Week;
-import christmas.domain.order.food.FoodCategory;
+import christmas.domain.order.enums.food.FoodCategory;
 
 import java.util.Arrays;
 
 import static christmas.domain.calendar.enums.Week.WEEKDAY;
 import static christmas.domain.calendar.enums.Week.WEEKEND;
-import static christmas.domain.order.food.FoodCategory.DESSERT;
-import static christmas.domain.order.food.FoodCategory.MAIN_DISH;
+import static christmas.domain.order.enums.food.FoodCategory.DESSERT;
+import static christmas.domain.order.enums.food.FoodCategory.MAIN_DISH;
 
 public enum SaleTarget {
     MAIN_FOR_SALE(WEEKEND, MAIN_DISH),

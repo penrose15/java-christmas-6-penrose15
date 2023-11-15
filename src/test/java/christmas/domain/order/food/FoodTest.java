@@ -1,5 +1,7 @@
 package christmas.domain.order.food;
 
+import christmas.domain.order.enums.food.Food;
+import christmas.domain.order.enums.food.FoodCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static christmas.domain.order.food.Food.*;
-import static christmas.global.exception.OrderExceptionMessage.INVALID_ORDERS;
+import static christmas.domain.order.enums.food.Food.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

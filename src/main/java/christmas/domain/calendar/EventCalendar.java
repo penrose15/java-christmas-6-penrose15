@@ -4,16 +4,17 @@ import christmas.domain.calendar.enums.Week;
 import christmas.domain.calendar.converter.DateConverter;
 
 import static christmas.global.exception.DateExceptionMessage.INVALID_DATE;
+import static christmas.domain.calendar.enums.YearMonthDateDefinition.FIRST_DATE;
+import static christmas.domain.calendar.enums.YearMonthDateDefinition.LAST_DATE;
 
 public class EventCalendar {
-    private static final int FIRST_DAY = 1;
-    private static final int THIRTY_ONE_DAY = 31;
 
     private int date;
 
     private static final EventCalendar INSTANCE = new EventCalendar();
 
-    private EventCalendar() {}
+    private EventCalendar() {
+    }
 
     public static EventCalendar getInstance() {
         return INSTANCE;
@@ -27,7 +28,7 @@ public class EventCalendar {
     }
 
     private void validateDateIsInRange(int date) {
-        if (date < FIRST_DAY || date > THIRTY_ONE_DAY) {
+        if (date < FIRST_DATE.get() || date > LAST_DATE.get()) {
             throw new IllegalArgumentException(INVALID_DATE.get());
         }
     }

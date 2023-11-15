@@ -1,5 +1,7 @@
 package christmas.domain.badge.Enum;
 
+import static christmas.global.exception.CommonExceptionMessage.UNEXPECTED_EXCEPTION;
+
 public enum EventBadge {
     NONE("없음", 0)
     ,STAR("별", 5_000)
@@ -31,7 +33,7 @@ public enum EventBadge {
 
     public static void validateBenefitPrice(int benefitPrice) {
         if (benefitPrice < 0) {
-            throw new IllegalStateException("[ERROR] 예기치 못한 예외 - benefitPrice < 0");
+            throw new IllegalStateException(UNEXPECTED_EXCEPTION.get());
         }
     }
 }
